@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './task-filter.css';
 
-export default class ItemStatusFilter extends Component {
+export class TaskFilter extends Component {
   buttons = [
     { name: 'all', label: 'All' },
     { name: 'active', label: 'Active' },
@@ -13,7 +13,7 @@ export default class ItemStatusFilter extends Component {
 
     const buttons = this.buttons.map(({ name, label }) => {
       const isActive = filter === name;
-      const buttonFilter = isActive ? 'btn-info' : 'btn-outline';
+      const buttonFilter = isActive ? 'btn-outline' : 'btn-info';
       return (
         <button type="button" className={`btn ${buttonFilter}`} key={name} onClick={() => onFilterChange(name)}>
           {label}

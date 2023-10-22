@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './task.css';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-export default class TodoListItem extends Component {
+export class Task extends Component {
   state = {
     isEdit: false,
     currentValue: this.props.label,

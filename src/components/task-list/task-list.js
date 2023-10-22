@@ -1,9 +1,9 @@
 import React from 'react';
 
-import TodoListItem from './task';
+import { Task } from '../task/task';
 import './task-list.css';
 
-const TodoList = ({
+export const TaskList = ({
   todos, onDeleted, onToggleDone, changeItem,
 }) => {
   const elements = todos.map((item) => {
@@ -11,7 +11,7 @@ const TodoList = ({
 
     return (
       <li key={id}>
-        <TodoListItem
+        <Task
           {...item}
           onDeleted={() => onDeleted(id)}
           changeItem={changeItem}
@@ -23,5 +23,3 @@ const TodoList = ({
 
   return <ul className="task-list">{elements}</ul>;
 };
-
-export default TodoList;

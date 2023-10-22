@@ -50,11 +50,10 @@ html .clear-completed:active {
   cursor: pointer;
 }
 
-.filters button .btn-info {
+.filters .btn-info {
   border-color: rgba(175, 47, 47, 0.1);
 }
 
-.filters button .btn-outline:active {
+.filters .btn-info {
   border-color: rgba(175, 47, 47, 0.1);
-  color: green;
 }

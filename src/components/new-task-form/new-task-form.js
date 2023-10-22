@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './new-task-form.css';
 
-export default class ItemAddForm extends Component {
+export class NewTaskForm extends Component {
   state = {
     label: '',
   };
@@ -15,6 +15,9 @@ export default class ItemAddForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    if (this.state.label.trim() === '') {
+      return;
+    }
     this.props.addItem(this.state.label);
     this.setState({
       label: '',
