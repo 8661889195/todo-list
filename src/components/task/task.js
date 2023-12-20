@@ -9,7 +9,7 @@ export class Task extends Component {
   };
 
   componentWillUnmount() {
-    clearInterval(this.props.timerId);
+    clearInterval(this.props.timerId)
   }
 
   handleEdit = () => {
