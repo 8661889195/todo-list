@@ -13,7 +13,6 @@ export class TaskFilter extends Component {
 
     const buttons = this.buttons.map(({ name, label }) => {
       const isActive = filter === name;
-      console.log(filter, 'fsdfsd');
       const buttonFilter = isActive ? 'btn-info' : 'btn-outline';
       return (
         <button type="button" className={`btn ${buttonFilter}`} key={name} onClick={() => onFilterChange(name)}>

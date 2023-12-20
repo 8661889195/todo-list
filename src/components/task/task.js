@@ -8,6 +8,10 @@ export class Task extends Component {
     currentValue: this.props.label,
   };
 
+  componentWillUnmount() {
+    clearInterval(this.props.timerId);
+  }
+
   handleEdit = () => {
     if (this.state.isEdit) {
       this.props.changeItem(this.props.id, this.state.currentValue);
@@ -22,6 +26,7 @@ export class Task extends Component {
   handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       this.props.changeItem(this.props.id, this.state.currentValue);
+      console.log(this.props.id);
       this.setState({ isEdit: !this.state.isEdit });
     }
   };

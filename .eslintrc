@@ -5,6 +5,16 @@
     "node": true
   },
   "extends": ["airbnb/base"],
+  
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
   "rules": {
     "no-plusplus": "off",
     "class-methods-use-this": "off",
