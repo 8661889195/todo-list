@@ -14,14 +14,66 @@ export class App extends Component {
     filter: 'all',
   };
 
-  createTodoItem(label) {
+  createTodoItem(label, minValue, secValue) {
+    let minValueNumber = +minValue;
+    let secValueNumber = +secValue;
+    if (secValueNumber > 59) {
+      minValueNumber += Math.trunk(secValueNumber / 60);
+      secValueNumber += Math.trunk(secValueNumber / 60) * 60;
+    }
     return {
       label,
       done: false,
       id: this.maxId++,
       createdAt: new Date(),
+      minValue: minValueNumber,
+      secValue: secValueNumber,
+      isCounting: false,
+      timerId: null,
     };
   }
+
+  setDecrement = (id) => {
+    const currentTask = this.state.todoData.find((item) => item.id === id);
+    if (currentTask.secValue === 0 && currentTask.minValue !== 0) {
+      currentTask.minValue -= 1;
+      currentTask.secValue = 59;
+      const newTodoData = this.state.todoData.map((item) => (item.id === id ? currentTask : item));
+      this.setState({
+        todoData: newTodoData,
+      });
+      return;
+    }
+
+    if (currentTask.secValue === 0 && currentTask.minValue === 0) {
+      this.handleStop(id);
+      this.onToggleDone(id);
+      return;
+    }
+
+    currentTask.secValue -= 1;
+    const newTodoData = this.state.todoData.map((item) => (item.id === id ? currentTask : item));
+    this.setState({
+      todoData: newTodoData,
+    });
+  };
+
+  handleStart = (id) => {
+    const timerId = setInterval(() => this.setDecrement(id), 1000);
+    const newTodoData = this.state.todoData.map((item) => (item.id === id ? { ...item, isCounting: true, timerId } : item));
+    this.setState({
+      todoData: newTodoData,
+    });
+  };
+
+  handleStop = (id) => {
+    const currentTask = this.state.todoData.find((item) => item.id === id);
+    clearInterval(currentTask.timerId);
+    const newTodoData = this.state.todoData.map((item) => (item.id === id ? { ...item, isCounting: false, timerId: null } : item));
+    this.setState({
+      todoData: newTodoData,
+    });
+  };
 
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
@@ -40,13 +92,13 @@ export class App extends Component {
       const newTask = { ...currentTask, label: newLabel };
       const newTaskArray = todoData.map((item) => (item.id === id ? newTask : item));
       return {
-        todoData: newTaskArray
-      }
+        todoData: newTaskArray,
+      };
     });
   };
 
-  addItem = (text) => {
-    const newItem = this.createTodoItem(text);
+  addItem = (text, minValue, secValue) => {
+    const newItem = this.createTodoItem(text, minValue, secValue);
     this.setState(({ todoData }) => {
       const newArr = [...todoData, newItem];
       return {
@@ -73,8 +125,8 @@ export class App extends Component {
     this.setState(({ todoData }) => {
       const doneList = todoData.filter((el) => !el.done);
       return {
-        todoData: doneList
-      }
+        todoData: doneList,
+      };
     });
   };
 
@@ -111,6 +163,8 @@ export class App extends Component {
           onDeleted={this.deleteItem}
           onToggleDone={this.onToggleDone}
           changeItem={this.changeItem}
+          handleStart={this.handleStart}
+          handleStop={this.handleStop}
         />
         <Footer
           todoCount={todoCount}

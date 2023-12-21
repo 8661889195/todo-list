@@ -1,7 +1,4 @@
 .todo-list-item .icon {
-  position: absolute;
-  top: 0;
-  bottom: -3px;
   width: 30px;
   height: 40px;
   font-size: 34px;
@@ -29,18 +26,28 @@
 }
 
 .todo-list-item .icon-destroy {
+  position: absolute;
+  top: 0;
+  bottom: -3px;
   right: 10px;
 }
 
-.todo-list-item .toggle {
-  text-align: center;
-  width: 40px;
-  /* auto, since non-WebKit browsers doesn't support input styling */
-  height: auto;
+.todo-list-item .icon-edit {
   position: absolute;
   top: 0;
+  bottom: -3px;
+  font-size: 19px;
+  right: 45px;
+}
+
+.todo-list-item .toggle {
+  position: absolute;
+  width: 40px;
+  top: 0;
   bottom: 0;
+  height: auto;
   margin: auto 0;
+  text-align: center;
   border: none; /* Mobile Safari */
   -webkit-appearance: none;
   appearance: none;
@@ -48,7 +55,7 @@
   opacity: 0;
 }
 
-.todo-list-item .toggle + label {
+.todo-list-item .toggle + .label {
   background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
   background-repeat: no-repeat;
   background-position: 0;
@@ -64,14 +71,14 @@
   background-position: 0;
 }
 
-.todo-list-item label {
+.todo-list-item .label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 85px 15px 60px;
 }
 
-.todo-list-item.done {
+.todo-list-item-label {
   word-break: break-all;
   display: block;
   transition: color 0.4s;
@@ -84,7 +91,7 @@
   color: #cdcdcd;
 }
 
-.todo-list-item label input {
+.todo-list-item .label input {
   width: 482px;
   height: 54px;
   font-size: 24px;
@@ -93,6 +100,30 @@
 }
 
 .todo-list-item .message-date {
+  font-size: 13px;
+  color: gray;
+}
+
+.icon-pause:after {
+  content: '⏸';
+}
+
+.icon-play:after {
+  content: '▶';
+}
+
+.todo-list-item .icon-play,
+.todo-list-item .icon-pause {
+  font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.description__time-value {
+  margin-left: 5px;
+}
+
+.description {
   font-size: 13px;
   color: gray;
 }

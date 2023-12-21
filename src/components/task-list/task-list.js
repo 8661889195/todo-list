@@ -3,9 +3,7 @@ import React from 'react';
 import { Task } from '../task/task';
 import './task-list.css';
 
-export const TaskList = ({
-  todos, onDeleted, onToggleDone, changeItem,
-}) => {
+export const TaskList = ({ todos, onDeleted, onToggleDone, changeItem, handleStart, handleStop }) => {
   const elements = todos.map((item) => {
     const { id } = item;
 
@@ -16,6 +14,8 @@ export const TaskList = ({
           onDeleted={() => onDeleted(id)}
           changeItem={changeItem}
           onToggleDone={() => onToggleDone(id)}
+          handleStart={() => handleStart(id)}
+          handleStop={() => handleStop(id)}
         />
       </li>
     );
